@@ -1,0 +1,13 @@
+import arcpy, os
+import wget
+
+
+
+lyr = r'C:\ProjectsMain\CedarSeptic\Lidar\Lidar.gdb\ironco_100cmselection'
+outDir = r'C:\ProjectsMain\CedarSeptic\Lidar\outputs'
+
+with arcpy.da.SearchCursor(lyr, ['PATH', 'TILE', 'EXT']) as tiles:
+    for tile in sorted(tiles):
+
+        pathTile = os.path.join(tile[0], tile[1] + tile[2])
+        wget.download(pathTile,outDir)
